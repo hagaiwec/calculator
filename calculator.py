@@ -11,7 +11,40 @@ BUTTONS_LABELS = ["7", "8", "9", "DEL", "AC",
 
 def clear_input():
     input_screen.delete(0, tk.END)
-    input_screen.insert(tk.END, EMPTY_ENTRY_TEXT)
+
+
+def add_to_input(btn_label):
+    input_screen.insert(tk.END, btn_label)
+
+
+def delete_from_input():
+    if input_screen.get()[-3:] == "Ans":
+        new_input = input_screen.get()[:-3]
+        input_screen.delete(0, tk.END)
+        input_screen.insert(0, new_input)
+    else:
+        new_input = input_screen.get()[:-1]
+        input_screen.delete(0, tk.END)
+        input_screen.insert(0, new_input)
+
+
+def button_pressed(btn_label):
+    print(btn_label)
+    if btn_label in "1234567890+−÷×." or btn_label == "Ans":
+        add_to_input(btn_label)
+        return None
+    elif btn_label == "DEL":
+        delete_from_input()
+        return None
+    elif btn_label == "AC":
+        clear_input()
+        return None
+    elif btn_label == "=":
+        # result = parse_input(input_screen.get())
+        pass
+    else:
+        pass
+
 
 
 root = tk.Tk()
