@@ -2,11 +2,11 @@ import tkinter as tk
 
 
 EMPTY_ENTRY_TEXT = "insert caculation here"
-BUTTONS_DIMENSIONS = {"rows": 4, "cols":5}
+BUTTONS_DIMENSIONS = {"rows": 4, "cols": 5}
 BUTTONS_LABELS = ["7", "8", "9", "DEL", "AC",
-                  "4", "5", "6", "\u00d7", "\u00f7",
+                  "4", "5", "6", "÷", "×",
                   "1", "2", "3", "+", "−",
-                  "0", ".", "EXP", "ANS", "="]
+                  "0", ".", "EXP", "Ans", "="]
 
 
 def clear_input():
