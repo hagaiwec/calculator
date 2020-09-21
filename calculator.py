@@ -15,6 +15,7 @@ def clear_input():
 
 
 root = tk.Tk()
+root.geometry("300x500")
 root.title("Pyculator!")
 root.rowconfigure(1, weight=1)
 root.columnconfigure(1, weight=1)
