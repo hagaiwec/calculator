@@ -46,7 +46,6 @@ def button_pressed(btn_label):
         pass
 
 
-
 root = tk.Tk()
 root.geometry("300x500")
 root.title("Pyculator!")
