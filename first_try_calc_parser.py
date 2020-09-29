@@ -24,6 +24,12 @@ PATTERNS = [
     ]
 
 
+class ParseError(Exception):
+    def __init__(self, string, arg):
+        self.arg = arg
+        self.string = string.format(arg)
+
+
 class Scanner(object):
     """
     Takes a string of characters and breaks it down to tokens.
@@ -51,3 +57,19 @@ class Scanner(object):
     def scan(self):
         while len(self.input[self.cur_index:]) > 0:
             yield self.next_token()
+
+
+class Parser(object):
+    def __init__(self, tokens):
+        self.tokens = tokens
+        self.stack = []
+
+    def callback(self, value):
+        pass
+
+    def digest_stack(self, token, value):
+        pass
+
+    def parse(self):
+        for token, value in self.tokens:
+            self.digest_stack(token, value)
