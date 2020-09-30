@@ -5,7 +5,7 @@ import operator
 OPS = {
     "+": operator.add,
     "-": operator.sub,
-    "×": operator.mult,
+    "×": operator.mul,
     "*": operator.mul,
     "÷": operator.truediv,
     "/": operator.truediv
@@ -40,7 +40,7 @@ def BNF():
         plus, minus = map(pp.Literal, "+-")
         mult = pp.oneOf("×*")
         div = pp.oneOf("÷/")
-        lpar, rpar = map(pp.Supress, "()")
+        lpar, rpar = map(pp.Suppress, "()")
 
         # ------------ parsing -----------
         expr = pp.Forward()
@@ -59,13 +59,13 @@ def BNF():
     return bnf
 
 
-def evaluate_stack(s):
+def evaluate_stack(stack):
     op = stack.pop()
     if op == "unary -":
-        return -evaluate_stack(s)
+        return -evaluate_stack(stack)
     if op in "+-×*÷/":
-        op2 = evaluate_stack(s)
-        op1 = evaluate_stack(s)
+        op2 = evaluate_stack(stack)
+        op1 = evaluate_stack(stack)
         return OPS[op](op1, op2)
     else:
         # if code got here it means it is an integer.
