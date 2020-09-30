@@ -2,6 +2,14 @@ import pyparsing as pp
 import operator
 
 
+OPS = {
+    "+": operator.add,
+    "-": operator.sub,
+    "×": operator.mult,
+    "*": operator.mul,
+    "÷": operator.truediv,
+    "/": operator.truediv
+}
 expr_stack = []
 bnf = None
 
@@ -49,3 +57,20 @@ def BNF():
         expr <<= term + (addop + term).setParseAction(push_to_stack)[...]
         bnf = expr
     return bnf
+
+
+def evaluate_stack(s):
+    op = stack.pop()
+    if op == "unary -":
+        return -evaluate_stack(s)
+    if op in "+-×*÷/":
+        op2 = evaluate_stack(s)
+        op1 = evaluate_stack(s)
+        return OPS[op](op1, op2)
+    else:
+        # if code got here it means it is an integer.
+        try:
+            # try to evaluate as int first, if fails then float
+            return int(op)
+        except ValueError:
+            return float(op)
