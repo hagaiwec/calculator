@@ -75,3 +75,9 @@ def evaluate_stack(stack):
             return int(op)
         except ValueError:
             return float(op)
+
+
+def parse(string):
+    BNF().parseString(string, parseAll=True)
+    result = evaluate_stack(expr_stack)
+    return result
