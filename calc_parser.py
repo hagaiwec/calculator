@@ -19,15 +19,16 @@ def push_to_stack(tokens):
 
 
 def push_unary_minus(tokens):
-    if tokens[0] == "-":
-        expr_stack.append("unary -")
+    for token in tokens:
+        if token == '-':
+            expr_stack.append("unary -")
 
 
 def BNF():
     """
     multop  :: '×' | '÷' | '*' | '/'
     addop   :: '+' | '-'
-    integer :: ['+' | '-'] '0'..'9'+
+    real :: ['+' | '-'] '0'..'9'+ [ '.' '0'..'9'* ]
     atom    :: real | '(' expr ')'
     factor  :: atom
     term    :: factor [ multop factor ]*
@@ -38,8 +39,8 @@ def BNF():
         # ------- lexical analysis -------
         realnum = pp.Regex(r"[+-]?\d+(?:\.\d*)?")
         plus, minus = map(pp.Literal, "+-")
-        mult = pp.oneOf("×*")
-        div = pp.oneOf("÷/")
+        mult = pp.Literal("×") | pp.Literal("*")
+        div = pp.Literal("÷") | pp.Literal("/")
         lpar, rpar = map(pp.Suppress, "()")
 
         # ------------ parsing -----------
